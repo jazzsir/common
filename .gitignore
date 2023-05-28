@@ -65,5 +65,10 @@ Temporary Items
 vendor/
 
 ## cscope
+<<<<<<< HEAD
 cscope.*
 tags
+=======
+tags
+cscope.*
+>>>>>>> a705cd21602100ccb04167047b3a722515f8153a
