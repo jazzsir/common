@@ -59,24 +59,24 @@ func (jc *JobController) SyncPodGroup(job metav1.Object, specFunc FillPodGroupSp
 		printPodGroup, _ := json.Marshal(newPodGroup)
 		fmt.Println("HBSEO 0odGroup: %s", string(printPodGroup))
 		newPodGroup.SetName(job.GetName())
-		printPodGroup, _ := json.Marshal(newPodGroup)
+		printPodGroup, _ = json.Marshal(newPodGroup)
 		fmt.Println("HBSEO 1odGroup: %s", string(printPodGroup))
 		newPodGroup.SetNamespace(job.GetNamespace())
-		printPodGroup, _ := json.Marshal(newPodGroup)
+		printPodGroup, _ = json.Marshal(newPodGroup)
 		fmt.Println("HBSEO 2odGroup: %s", string(printPodGroup))
 		newPodGroup.SetAnnotations(job.GetAnnotations())
-		printPodGroup, _ := json.Marshal(newPodGroup)
+		printPodGroup, _ = json.Marshal(newPodGroup)
 		fmt.Println("HBSEO 3odGroup: %s", string(printPodGroup))
 		newPodGroup.SetOwnerReferences([]metav1.OwnerReference{*jc.GenOwnerReference(job)})
-		printPodGroup, _ := json.Marshal(newPodGroup)
+		printPodGroup, _ = json.Marshal(newPodGroup)
 		fmt.Println("HBSEO 4odGroup: %s", string(printPodGroup))
 		if err = specFunc(newPodGroup); err != nil {
 			return nil, fmt.Errorf("unable to fill the spec of PodGroup, '%v': %v", klog.KObj(newPodGroup), err)
 		}
-		printPodGroup, _ := json.Marshal(newPodGroup)
+		printPodGroup, _ = json.Marshal(newPodGroup)
 		fmt.Println("HBSEO 5odGroup: %s", string(printPodGroup))
 
-		printPodGroup, _ := json.Marshal(newPodGroup)
+		printPodGroup, _ = json.Marshal(newPodGroup)
 
 		fmt.Println("HBSEO PodGroup: %s", string(printPodGroup))
 
