@@ -18,6 +18,7 @@ package common
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 
@@ -62,6 +63,11 @@ func (jc *JobController) SyncPodGroup(job metav1.Object, specFunc FillPodGroupSp
 		if err = specFunc(newPodGroup); err != nil {
 			return nil, fmt.Errorf("unable to fill the spec of PodGroup, '%v': %v", klog.KObj(newPodGroup), err)
 		}
+
+		printPodGroup, _ := json.Marshal(newPodGroup)
+
+		log.Infof("HBSEO PodGroup: %s", string(printPodGroup))
+		fmt.Println("HBSEO PodGroup: %s", string(printPodGroup))
 
 		err = pgctl.CreatePodGroup(newPodGroup)
 		if err != nil {

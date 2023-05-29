@@ -18,6 +18,7 @@ package control
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	corev1 "k8s.io/api/core/v1"
@@ -190,9 +191,14 @@ func (s *SchedulerPluginsControl) UpdatePodGroup(podGroup client.Object) error {
 
 func (s *SchedulerPluginsControl) CreatePodGroup(podGroup client.Object) error {
 	pg := podGroup.(*schedulerpluginsv1alpha1.PodGroup)
+
+	printPodGroup, _ := json.Marshal(pg)
+
+	fmt.Println("HBSEO PodGroup in podgroup_control: %s", string(printPodGroup))
+
 	err := s.Client.Create(context.TODO(), pg, &client.CreateOptions{})
 	if err != nil {
-		return fmt.Errorf("unable to create a PodGroup, '%v': %v", klog.KObj(pg), err)
+		return fmt.Errorf("[HBSEO/podgroup_control/SchedulerPluginsControl] unable to create a PodGroup, '%v': %v", klog.KObj(pg), err)
 	}
 	return nil
 }
