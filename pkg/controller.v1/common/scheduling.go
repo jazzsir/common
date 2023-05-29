@@ -57,7 +57,6 @@ func (jc *JobController) SyncPodGroup(job metav1.Object, specFunc FillPodGroupSp
 		// create podGroup for gang scheduling
 		newPodGroup := pgctl.NewEmptyPodGroup()
 		printPodGroup, _ := json.Marshal(newPodGroup)
-		newPodGroup.Status.ScheduleStartTime = ""
 		fmt.Println("HBSEO 0odGroup: %s", string(printPodGroup))
 		newPodGroup.SetName(job.GetName())
 		printPodGroup, _ = json.Marshal(newPodGroup)
