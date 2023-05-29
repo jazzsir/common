@@ -160,7 +160,7 @@ func (s *SchedulerPluginsControl) NewEmptyPodGroup() client.Object {
 
 	scheduleTime := metav1.Time{Time: time.Date(2023, 5, 28, 10, 30, 0, 0, time.UTC)}
 
-	tt.Status.ScheduleStartTime = &scheduleTime
+	tt.Status.ScheduleStartTime = scheduleTime
 
 	return tt
 }
