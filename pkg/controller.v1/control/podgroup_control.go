@@ -20,6 +20,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"time"
 
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -155,7 +156,13 @@ func (s *SchedulerPluginsControl) DelayPodCreationDueToPodGroup(pg metav1.Object
 }
 
 func (s *SchedulerPluginsControl) NewEmptyPodGroup() client.Object {
-	return &schedulerpluginsv1alpha1.PodGroup{}
+	tt := &schedulerpluginsv1alpha1.PodGroup{}
+
+	scheduleTime := metav1.Time{Time: time.Date(2023, 5, 28, 10, 30, 0, 0, time.UTC)}
+
+	tt.Status.ScheduleStartTime = &scheduleTime
+
+	return tt
 }
 
 func (s *SchedulerPluginsControl) GetPodGroup(namespace, name string) (metav1.Object, error) {
